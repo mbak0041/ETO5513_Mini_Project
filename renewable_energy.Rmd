@@ -88,3 +88,21 @@ ggplot(final_data, aes(x = Renewables, y = Fossil.fuels, color = Entity)) +
 # Section 7: Conclusions
 
 The analysis indicates a negative relationship between renewable and fossil fuel electricity generation shares across Australia, Canada, Germany, India and Japan from 2000 to 2024. Countries with higher renewable electricity shares generally recorded lower fossil fuel shares. Canada had the highest average renewable electricity share at 62.73% and the lowest average fossil fuel share at 22.82%, while Australia recorded the highest average fossil fuel share at 84.68%. These findings demonstrate substantial differences in electricity generation mixes across the five countries. However, the relationship is descriptive rather than causal, and other electricity sources, including nuclear power, also contribute to national electricity generation. Overall, the results suggest that renewable electricity plays an important role in reducing reliance on fossil fuel-based generation.
+
+# Part B: Additional Analysis
+
+## Figure 2: Renewable Electricity Trends
+```{r renewable-trends, fig.cap="Figure 2: Renewable electricity generation shares across five countries, 2000–2024"}
+ggplot(final_data, aes(x = Year, y = Renewables, color = Entity)) +
+  geom_line(linewidth = 1) +
+  labs(
+    title = "Renewable Electricity Trends (2000–2024)",
+    x = "Year",
+    y = "Renewable electricity share (%)",
+    color = "Country"
+  ) +
+  theme_minimal()
+```
+
+Figure 2 illustrates changes in renewable electricity generation shares across the five selected countries between 2000 and 2024. It allows comparisons of how each country's renewable electricity contribution has evolved over time, complementing the relationship shown in the original scatter plot.
+
