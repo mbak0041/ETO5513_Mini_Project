@@ -1,0 +1,90 @@
+---
+title: "Renewable Energy Analysis"
+author: "Mirna Bakri"
+date: "2026-11-01"
+output: html_document
+---
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(rmarkdown)
+```
+
+# Section 2: Research Question
+
+How does the share of electricity generated from renewable sources relate to the share generated from fossil fuels across selected countries?
+
+# Section 3: Dataset Introduction
+This analysis uses electricity generation data from [Our World in Data](https://ourworldindata.org/electricity-mix). The dataset examines renewable and fossil fuel electricity generation shares across Australia, Canada, Germany, India and Japan between 2000 and 2024.
+
+The variable `Entity` identifies the country, while `Year` records the observation year. `Renewables` represents the percentage of electricity generated from renewable sources. `Fossil.fuels` represents the percentage generated from fossil fuels.
+
+```{r import-final-data}
+final_data <- read.csv("Data/electricity_analysis.csv")
+```
+
+```{r variable-table}
+variable_names <- data.frame(
+  Variable = names(final_data)
+)
+
+knitr::kable(
+  variable_names,
+  caption = "Variables included in the electricity dataset"
+)
+```
+
+# Section 4: Dataset Description
+
+The dataset contains `r nrow(final_data)` observations and `r ncol(final_data)` variables.
+
+```{r dataset-structure}
+str(final_data)
+head(final_data, 2)
+```
+
+```{r code-screenshot, echo=TRUE, out.width="75%"}
+knitr::include_graphics("Image/dataset_code.png")
+```
+
+# Section 5: Data Summary
+
+```{r country-summary}
+summary_data <- final_data %>%
+  select(Entity, Renewables, Fossil.fuels) %>%
+  group_by(Entity) %>%
+  summarise(
+    Average_Renewables = mean(Renewables),
+    Average_Fossil_Fuels = mean(Fossil.fuels)
+  )
+
+knitr::kable(
+  summary_data,
+  digits = 2,
+  caption = "Average renewable and fossil fuel electricity shares by country, 2000–2024"
+)
+```
+
+Canada recorded the **highest** average renewable electricity share at 62.73%, while Japan had the lowest at 13.15% across the selected period. Australia had the highest average fossil fuel electricity share at 84.68%, compared with Canada's 22.82%, indicating substantial differences in electricity generation mixes across the five countries.
+
+# Section 6: Data Visualisation
+
+```{r electricity-scatter, fig.cap="Relationship between renewable and fossil fuel electricity shares across five countries, 2000–2024"}
+ggplot(final_data, aes(x = Renewables, y = Fossil.fuels, color = Entity)) +
+  geom_point(size = 2.5, alpha = 0.7) +
+  labs(
+    title = "Renewable vs Fossil Fuel Electricity Generation",
+    x = "Renewable electricity share (%)",
+    y = "Fossil fuel electricity share (%)",
+    color = "Country"
+  ) +
+  theme_minimal()
+```
+- *The scatter plot shows a negative relationship between renewable and fossil fuel electricity shares, with higher renewable shares generally associated with lower fossil fuel shares.*
+
+- *Canada has relatively high renewable electricity shares and low fossil fuel shares, whereas Australia and India generally show greater reliance on fossil fuels.*
+
+# Section 7: Conclusions
+
+The analysis indicates a negative relationship between renewable and fossil fuel electricity generation shares across Australia, Canada, Germany, India and Japan from 2000 to 2024. Countries with higher renewable electricity shares generally recorded lower fossil fuel shares. Canada had the highest average renewable electricity share at 62.73% and the lowest average fossil fuel share at 22.82%, while Australia recorded the highest average fossil fuel share at 84.68%. These findings demonstrate substantial differences in electricity generation mixes across the five countries. However, the relationship is descriptive rather than causal, and other electricity sources, including nuclear power, also contribute to national electricity generation. Overall, the results suggest that renewable electricity plays an important role in reducing reliance on fossil fuel-based generation.
