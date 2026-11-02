@@ -424,6 +424,9 @@ knitr::kable(
 </div>
 <div id="section-5-data-summary" class="section level1">
 <h1>Section 5: Data Summary</h1>
+<div id="table-1-average-renewable-and-fossil-fuel-electricity-generation-shares-by-country" class="section level2">
+<h2>Table 1: Average renewable and fossil fuel electricity generation
+shares by country</h2>
 <pre class="r"><code>summary_data &lt;- final_data %&gt;%
   select(Entity, Renewables, Fossil.fuels) %&gt;%
   group_by(Entity) %&gt;%
@@ -435,11 +438,11 @@ knitr::kable(
 knitr::kable(
   summary_data,
   digits = 2,
-  caption = &quot;Average renewable and fossil fuel electricity shares by country, 2000–2024&quot;
+  caption = &quot;Table 1: Average renewable and fossil fuel electricity shares by country, 2000–2024&quot;
 )</code></pre>
 <table>
-<caption>Average renewable and fossil fuel electricity shares by
-country, 2000–2024</caption>
+<caption>Table 1: Average renewable and fossil fuel electricity shares
+by country, 2000–2024</caption>
 <thead>
 <tr class="header">
 <th align="left">Entity</th>
@@ -481,6 +484,7 @@ the selected period. Australia had the highest average fossil fuel
 electricity share at 84.68%, compared with Canada’s 22.82%, indicating
 substantial differences in electricity generation mixes across the five
 countries.</p>
+</div>
 </div>
 <div id="section-6-data-visualisation" class="section level1">
 <h1>Section 6: Data Visualisation</h1>
@@ -550,6 +554,75 @@ shares across the five selected countries between 2000 and 2024. It
 allows comparisons of how each country’s renewable electricity
 contribution has evolved over time, complementing the relationship shown
 in the original scatter plot.</p>
+</div>
+<div id="table-2-renewable-electricity-in-2000-and-2024" class="section level2">
+<h2>Table 2: Renewable Electricity in 2000 and 2024</h2>
+<pre class="r"><code>comparison_table &lt;- final_data %&gt;%
+  filter(Year %in% c(2000, 2024)) %&gt;%
+  select(Entity, Year, Renewables) %&gt;%
+  tidyr::pivot_wider(
+    names_from = Year,
+    values_from = Renewables,
+    names_prefix = &quot;Year_&quot;
+  ) %&gt;%
+  mutate(
+    Change = Year_2024 - Year_2000
+  )
+
+knitr::kable(
+  comparison_table,
+  digits = 2,
+  caption = &quot;Table 2: Changes in renewable electricity shares between 2000 and 2024&quot;
+)</code></pre>
+<table>
+<caption>Table 2: Changes in renewable electricity shares between 2000
+and 2024</caption>
+<thead>
+<tr class="header">
+<th align="left">Entity</th>
+<th align="right">Year_2000</th>
+<th align="right">Year_2024</th>
+<th align="right">Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Australia</td>
+<td align="right">8.09</td>
+<td align="right">35.08</td>
+<td align="right">26.99</td>
+</tr>
+<tr class="even">
+<td align="left">Canada</td>
+<td align="right">60.61</td>
+<td align="right">64.27</td>
+<td align="right">3.66</td>
+</tr>
+<tr class="odd">
+<td align="left">Germany</td>
+<td align="right">6.22</td>
+<td align="right">58.64</td>
+<td align="right">52.42</td>
+</tr>
+<tr class="even">
+<td align="left">India</td>
+<td align="right">14.05</td>
+<td align="right">19.81</td>
+<td align="right">5.76</td>
+</tr>
+<tr class="odd">
+<td align="left">Japan</td>
+<td align="right">9.19</td>
+<td align="right">22.94</td>
+<td align="right">13.75</td>
+</tr>
+</tbody>
+</table>
+<p>Table 2 compares renewable electricity generation shares in 2000 and
+2024 for the five selected countries. The change column measures the
+difference in percentage points, helping identify which countries
+experienced the largest increases or decreases in renewable electricity
+generation over the period.</p>
 </div>
 </div>
 
