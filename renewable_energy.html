@@ -538,9 +538,9 @@ important role in reducing reliance on fossil fuel-based generation.</p>
     names_prefix = &quot;Year_&quot;
   ) %&gt;%
   mutate(
-    Change = Year_2024 - Year_2000
-  )
-
+    Change_pp = Year_2024 - Year_2000
+  ) %&gt;%
+  arrange(desc(Change_pp))
 knitr::kable(
   comparison_table,
   digits = 2,
@@ -554,27 +554,27 @@ and 2024</caption>
 <th align="left">Entity</th>
 <th align="right">Year_2000</th>
 <th align="right">Year_2024</th>
-<th align="right">Change</th>
+<th align="right">Change_pp</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Australia</td>
-<td align="right">8.09</td>
-<td align="right">35.08</td>
-<td align="right">26.99</td>
-</tr>
-<tr class="even">
-<td align="left">Canada</td>
-<td align="right">60.61</td>
-<td align="right">64.27</td>
-<td align="right">3.66</td>
-</tr>
 <tr class="odd">
 <td align="left">Germany</td>
 <td align="right">6.22</td>
 <td align="right">58.64</td>
 <td align="right">52.42</td>
+</tr>
+<tr class="even">
+<td align="left">Australia</td>
+<td align="right">8.09</td>
+<td align="right">35.08</td>
+<td align="right">26.99</td>
+</tr>
+<tr class="odd">
+<td align="left">Japan</td>
+<td align="right">9.19</td>
+<td align="right">22.94</td>
+<td align="right">13.75</td>
 </tr>
 <tr class="even">
 <td align="left">India</td>
@@ -583,10 +583,10 @@ and 2024</caption>
 <td align="right">5.76</td>
 </tr>
 <tr class="odd">
-<td align="left">Japan</td>
-<td align="right">9.19</td>
-<td align="right">22.94</td>
-<td align="right">13.75</td>
+<td align="left">Canada</td>
+<td align="right">60.61</td>
+<td align="right">64.27</td>
+<td align="right">3.66</td>
 </tr>
 </tbody>
 </table>

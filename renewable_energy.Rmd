@@ -103,9 +103,9 @@ comparison_table <- final_data %>%
     names_prefix = "Year_"
   ) %>%
   mutate(
-    Change = Year_2024 - Year_2000
-  )
-
+    Change_pp = Year_2024 - Year_2000
+  ) %>%
+  arrange(desc(Change_pp))
 knitr::kable(
   comparison_table,
   digits = 2,
