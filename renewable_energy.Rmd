@@ -1,7 +1,7 @@
 ---
 title: "Renewable Energy Analysis"
 author: "Mirna Bakri"
-date: "2026-11-01"
+date: "2026-11-08"
 output: html_document
 ---
 # Section 1: Loading Libraries
@@ -128,8 +128,8 @@ comparison_table <- final_data %>%
   ) %>%
   mutate(
     Change_pp = Year_2024 - Year_2000
-  )
-
+  ) %>%
+  arrange(desc(Change_pp))
 knitr::kable(
   comparison_table,
   digits = 2,
