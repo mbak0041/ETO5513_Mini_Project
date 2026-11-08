@@ -95,6 +95,7 @@ The analysis indicates a negative relationship between renewable and fossil fuel
 ```{r renewable-trends, fig.cap="Figure 2: Renewable electricity generation shares across five countries, 2000–2024"}
 ggplot(final_data, aes(x = Year, y = Renewables, color = Entity)) +
   geom_line(linewidth = 1) +
+  geom_point(size = 1.5, alpha = 0.7) +
   labs(
     title = "Renewable Electricity Trends (2000–2024)",
     x = "Year",
