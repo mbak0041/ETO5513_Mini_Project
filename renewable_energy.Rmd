@@ -41,13 +41,13 @@ knitr::kable(
 
 The dataset contains `r nrow(final_data)` observations and `r ncol(final_data)` variables.
 
+```{r code-screenshot, echo=TRUE, out.width="75%"}
+knitr::include_graphics("Image/dataset_code.png")
+```
+
 ```{r dataset-structure}
 str(final_data)
 head(final_data, 2)
-```
-
-```{r code-screenshot, echo=TRUE, out.width="75%"}
-knitr::include_graphics("Image/dataset_code.png")
 ```
 
 The dataset contains one character variable (`Entity`) and three numerical variables (`Year`, `Renewables` and `Fossil.fuels`).
